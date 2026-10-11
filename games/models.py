@@ -14,8 +14,8 @@ class Game(models.Model):
     release_date = models.DateField()
     developer = models.CharField(max_length=50)
     publisher = models.CharField(max_length=50)
-    genres = models.ManyToManyField('Genre')
-    platforms = models.ManyToManyField('platforms.Platform')
+    genres = models.ManyToManyField('Genre', blank=True)
+    platforms = models.ManyToManyField('platforms.Platform', blank=True)
 
     def __str__(self):
         return self.title
