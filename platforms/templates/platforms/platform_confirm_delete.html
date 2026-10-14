@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Platform</title>
+</head>
+<body>
+<h1>Delete Platform</h1>
+
+<p>Are you sure you want to delete "{{ platform.name }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+</body>
+</html>

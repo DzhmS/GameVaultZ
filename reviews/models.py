@@ -8,8 +8,10 @@ class Review(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     rating = models.IntegerField(
         validators=[
-            MinValueValidator(1),
-            MaxValueValidator(100),
+            MinValueValidator(1,
+                              message='Score cannot be lower than 1.'),
+            MaxValueValidator(100,
+                              message='Score cannot be higher than 100.'),
         ]
     )
     comment = models.TextField(blank=True)

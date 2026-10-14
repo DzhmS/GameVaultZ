@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews</title>
+</head>
+<body>
+<h1>Reviews</h1>
+
+{% for review in reviews %}
+    <p>
+        <a href="{% url 'review-detail' review.pk %}">
+            {{ review.game }} - {{ review.rating }}/100
+        </a>
+    </p>
+
+{% endfor %}
+
+</body>
+</html>

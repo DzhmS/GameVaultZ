@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review</title>
+</head>
+<body>
+<h1>{{ review.game }}</h1>
+
+<p>Rating: {{ review.rating }}/100</p>
+<p>{{ review.comment }}</p>
+<p>Created at: {{ review.created_at }}</p>
+
+<a href="{% url 'review-update' review.pk %}">Edit</a>
+<a href="{% url 'review-delete' review.pk %}">Delete</a>
+
+</body>
+</html>
