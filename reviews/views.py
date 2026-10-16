@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import ReviewForm
 from .models import Review
@@ -15,7 +15,7 @@ def review_list(request):
 
 
 def review_detail(request, pk):
-    review = Review.objects.get(pk=pk)
+    review = get_object_or_404(Review, pk=pk)
 
     context = {
         'review': review,
@@ -39,7 +39,7 @@ def review_create(request):
 
 
 def review_update(request, pk):
-    review = Review.objects.get(pk=pk)
+    review = get_object_or_404(Review, pk=pk)
     form = ReviewForm(request.POST or None, instance=review)
 
     form.fields['game'].disabled = True
@@ -57,7 +57,7 @@ def review_update(request, pk):
 
 
 def review_delete(request, pk):
-    review = Review.objects.get(pk=pk)
+    review = get_object_or_404(Review, pk=pk)
 
     if request.method == 'POST':
         review.delete()

@@ -8,7 +8,7 @@
 <h1>{{ game.title }}</h1>
 
 <p>{{ game.description }}</p>
-<p>Release Date: {{ game.release_date }}</p>
+<p>Release Date: {{ game.release_date|date:"F j, Y" }}</p>
 <p>Developer: {{ game.developer }}</p>
 <p>Publisher: {{ game.publisher }}</p>
 <h3>Genres</h3>
@@ -23,5 +23,6 @@
 {% endfor %}
 <a href="{% url 'game-update' game.pk %}">Edit</a>
 <a href="{% url 'game-delete' game.pk %}">Delete</a>
+<a href="{% url 'game-list' %}">Back to Games</a>
 </body>
 </html>

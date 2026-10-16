@@ -7,12 +7,69 @@
 <body>
     <h1>Games</h1>
 
+    <form method="get">
+        <label for="genre">Genre:</label>
+        <select name="genre" id="genre">
+            <option value="">All Genres</option>
+
+            {% for genre in genres %}
+                <option value="{{ genre.pk }}"
+                    {% if selected_genre == genre.pk|stringformat:"s" %}selected{% endif %}>
+                    {{ genre.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="platform">Platform:</label>
+        <select name="platform" id="platform">
+            <option value="">All Platforms</option>
+
+            {% for platform in platforms %}
+                <option value="{{ platform.pk }}"
+                    {% if selected_platform == platform.pk|stringformat:"s" %}selected{% endif %}>
+                    {{ platform.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="sort">Sort:</label>
+        <select name="sort" id="sort">
+    <option value="title"
+        {% if selected_sort == 'title' %}selected{% endif %}>
+        Title A-Z
+    </option>
+
+    <option value="-title"
+        {% if selected_sort == '-title' %}selected{% endif %}>
+        Title Z-A
+    </option>
+
+    <option value="release_date"
+        {% if selected_sort == 'release_date' %}selected{% endif %}>
+        Release Date Oldest
+    </option>
+
+    <option value="-release_date"
+        {% if selected_sort == '-release_date' %}selected{% endif %}>
+        Release Date Newest
+    </option>
+</select>
+
+        <button type="submit">Apply</button>
+        <a href="{% url 'game-list' %}">Reset Filters</a>
+    </form>
+
+    <hr>
+
     {% for game in games %}
         <p>
             <a href="{% url 'game-detail' game.pk %}">
                 {{ game.title }}
             </a>
         </p>
+    {% empty %}
+        <p>No games found.</p>
     {% endfor %}
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import PlatformForm
 from .models import Platform
@@ -15,7 +15,7 @@ def platform_list(request):
 
 
 def platform_detail(request, pk):
-    platform = Platform.objects.get(pk=pk)
+    platform = get_object_or_404(Platform, pk=pk)
 
     context = {
         'platform': platform,
@@ -39,7 +39,7 @@ def platform_create(request):
 
 
 def platform_update(request, pk):
-    platform = Platform.objects.get(pk=pk)
+    platform = get_object_or_404(Platform, pk=pk)
     form = PlatformForm(request.POST or None, instance=platform)
 
     if form.is_valid():
@@ -54,7 +54,7 @@ def platform_update(request, pk):
 
 
 def platform_delete(request, pk):
-    platform = Platform.objects.get(pk=pk)
+    platform = get_object_or_404(Platform, pk=pk)
 
     if request.method == 'POST':
         platform.delete()

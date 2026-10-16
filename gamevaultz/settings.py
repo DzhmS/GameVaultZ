@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-()(a-h3g$fpg1p7yy5m7#5$mc1a@e85^(cncvavx+910h2q9bq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -58,7 +58,7 @@ ROOT_URLCONF = 'gamevaultz.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
