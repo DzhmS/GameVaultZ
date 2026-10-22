@@ -1,15 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ platform.name }}</title>
-</head>
-<body>
-<h1>{{ platform.name }}</h1>
-<p>{{ platform.description }}</p>
+{% extends 'base.html' %}
 
-<a href="{% url 'platform-update' platform.pk %}">Edit</a>
-<a href="{% url 'platform-delete' platform.pk %}">Delete</a>
-<a href="{% url 'platform-list' %}">Back to Platforms</a>
-</body>
-</html>
+{% block title %}
+{{ platform.name }}
+{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+
+        <h1 class="card-title mb-3">
+            {{ platform.name }}
+        </h1>
+
+        <p class="card-text">
+            {{ platform.description|default:"No description." }}
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'platform-update' platform.pk %}"
+               class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'platform-delete' platform.pk %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            <a href="{% url 'platform-list' %}"
+               class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

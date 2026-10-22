@@ -1,24 +1,59 @@
+{% extends 'base.html' %}
 {% load game_filters %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Review</title>
-</head>
-<body>
-<h1>{{ review.game }}</h1>
+{% block title %}
+    Review Details
+{% endblock %}
 
-<p>
-    Rating: {{ review.rating }}/100 -
-    {{ review.rating|score_label }}
-</p>
-<p>{{ review.comment }}</p>
-<p>Created at: {{ review.created_at }}</p>
+{% block content %}
 
-<a href="{% url 'review-update' review.pk %}">Edit</a>
-<a href="{% url 'review-delete' review.pk %}">Delete</a>
-<a href="{% url 'review-list' %}">Back to Reviews</a>
+<div class="card shadow-sm">
+    <div class="card-body p-4">
 
-</body>
-</html>
+        <h1 class="card-title mb-3">
+            Review for {{ review.game }}
+        </h1>
+
+        <p>
+            <strong>Rating:</strong>
+            {{ review.rating }}/100
+        </p>
+
+        <p>
+            <strong>Rating Label:</strong>
+            {{ review.rating|score_label }}
+        </p>
+
+        <p>
+            <strong>Comment:</strong>
+        </p>
+
+        <p class="card-text">
+            {{ review.comment|default:"No comment." }}
+        </p>
+
+        <p class="text-muted">
+            Created: {{ review.created_at|date:"F j, Y" }}
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'review-update' review.pk %}"
+               class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'review-delete' review.pk %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            <a href="{% url 'review-list' %}"
+               class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

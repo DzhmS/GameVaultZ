@@ -15,7 +15,7 @@ class ReviewForm(forms.ModelForm):
 
         help_texts = {
             'rating': 'Enter a score from 1 to 100.',
-            'comment': 'Share your thoughts about the game.',
+
         }
 
         widgets = {

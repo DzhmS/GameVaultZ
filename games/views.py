@@ -55,7 +55,7 @@ def game_detail(request, pk):
 
 
 def game_create(request):
-    form = GameForm(request.POST or None)
+    form = GameForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
         form.save()
@@ -67,9 +67,15 @@ def game_create(request):
 
     return render(request, "games/game_form.html", context)
 
+
 def game_update(request, pk):
     game = get_object_or_404(Game, pk=pk)
-    form = GameForm(request.POST or None, instance=game)
+
+    form = GameForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=game
+    )
 
     if form.is_valid():
         form.save()

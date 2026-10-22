@@ -1,0 +1,33 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+
+        <a class="navbar-brand d-flex align-items-center"
+           href="{% url 'game-list' %}">
+
+            <img src="{% static 'images/logo.png' %}"
+                 alt="GameVaultZ Logo"
+                 width="32"
+                 height="32"
+                 class="me-2">
+
+            GameVaultZ
+        </a>
+
+        <div class="navbar-nav">
+            <a class="nav-link" href="{% url 'game-list' %}">Games</a>
+            <a class="nav-link" href="{% url 'genre-list' %}">Genres</a>
+            <a class="nav-link" href="{% url 'platform-list' %}">Platforms</a>
+            <a class="nav-link" href="{% url 'review-list' %}">Reviews</a>
+        </div>
+
+        <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="{% url 'game-create' %}">Add Game</a>
+            <a class="nav-link" href="{% url 'genre-create' %}">Add Genre</a>
+            <a class="nav-link" href="{% url 'platform-create' %}">Add Platform</a>
+            <a class="nav-link" href="{% url 'review-create' %}">Add Review</a>
+        </div>
+
+    </div>
+</nav>

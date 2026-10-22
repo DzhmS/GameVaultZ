@@ -1,75 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Games</title>
-</head>
-<body>
-    <h1>Games</h1>
+{% extends 'base.html' %}
 
-    <form method="get">
-        <label for="genre">Genre:</label>
-        <select name="genre" id="genre">
+{% block title %}
+Games
+{% endblock %}
+
+{% block content %}
+
+<h1>Games</h1>
+
+<form method="get" class="row g-3 align-items-end mb-4">
+
+    <div class="col-md-3">
+        <label for="genre" class="form-label">Genre</label>
+
+        <select name="genre" id="genre" class="form-select">
             <option value="">All Genres</option>
 
             {% for genre in genres %}
                 <option value="{{ genre.pk }}"
-                    {% if selected_genre == genre.pk|stringformat:"s" %}selected{% endif %}>
+                    {% if selected_genre == genre.pk|stringformat:"s" %}
+                        selected
+                    {% endif %}>
                     {{ genre.name }}
                 </option>
             {% endfor %}
         </select>
+    </div>
 
-        <label for="platform">Platform:</label>
-        <select name="platform" id="platform">
+    <div class="col-md-3">
+        <label for="platform" class="form-label">Platform</label>
+
+        <select name="platform" id="platform" class="form-select">
             <option value="">All Platforms</option>
 
             {% for platform in platforms %}
                 <option value="{{ platform.pk }}"
-                    {% if selected_platform == platform.pk|stringformat:"s" %}selected{% endif %}>
+                    {% if selected_platform == platform.pk|stringformat:"s" %}
+                        selected
+                    {% endif %}>
                     {{ platform.name }}
                 </option>
             {% endfor %}
         </select>
+    </div>
 
-        <label for="sort">Sort:</label>
-        <select name="sort" id="sort">
-    <option value="title"
-        {% if selected_sort == 'title' %}selected{% endif %}>
-        Title A-Z
-    </option>
+    <div class="col-md-3">
+        <label for="sort" class="form-label">Sort</label>
 
-    <option value="-title"
-        {% if selected_sort == '-title' %}selected{% endif %}>
-        Title Z-A
-    </option>
+        <select name="sort" id="sort" class="form-select">
 
-    <option value="release_date"
-        {% if selected_sort == 'release_date' %}selected{% endif %}>
-        Release Date Oldest
-    </option>
+            <option value="title"
+                {% if selected_sort == 'title' %}
+                    selected
+                {% endif %}>
+                Title A-Z
+            </option>
 
-    <option value="-release_date"
-        {% if selected_sort == '-release_date' %}selected{% endif %}>
-        Release Date Newest
-    </option>
-</select>
+            <option value="-title"
+                {% if selected_sort == '-title' %}
+                    selected
+                {% endif %}>
+                Title Z-A
+            </option>
 
-        <button type="submit">Apply</button>
-        <a href="{% url 'game-list' %}">Reset Filters</a>
-    </form>
+            <option value="release_date"
+                {% if selected_sort == 'release_date' %}
+                    selected
+                {% endif %}>
+                Release Date Oldest
+            </option>
 
-    <hr>
+            <option value="-release_date"
+                {% if selected_sort == '-release_date' %}
+                    selected
+                {% endif %}>
+                Release Date Newest
+            </option>
+
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-primary">
+            Apply
+        </button>
+
+        <a href="{% url 'game-list' %}"
+           class="btn btn-secondary">
+            Reset
+        </a>
+    </div>
+
+</form>
+
+<hr>
+
+<div class="row g-4">
 
     {% for game in games %}
-        <p>
-            <a href="{% url 'game-detail' game.pk %}">
-                {{ game.title }}
-            </a>
-        </p>
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="card h-100 shadow-sm">
+
+                {% if game.image %}
+                    <img src="{{ game.image.url }}"
+                         class="card-img-top"
+                         alt="{{ game.title }}">
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        {{ game.title }}
+                    </h5>
+
+                    <p class="card-text text-muted">
+                        Release Date:
+                        {{ game.release_date|date:"F j, Y" }}
+                    </p>
+
+                    <p class="card-text">
+                        {{ game.description|truncatewords:20 }}
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Publisher:</strong>
+                        {{ game.publisher }}
+                    </p>
+
+                    <a href="{% url 'game-detail' game.pk %}"
+                       class="btn btn-outline-primary">
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
     {% empty %}
+
         <p>No games found.</p>
+
     {% endfor %}
 
-</body>
-</html>
+</div>
+
+{% endblock %}

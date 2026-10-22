@@ -1,18 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Platform</title>
-</head>
-<body>
-<h1>Delete Platform</h1>
+{% extends 'base.html' %}
 
-<p>Are you sure you want to delete "{{ platform.name }}"?</p>
+{% block title %}
+Delete Platform
+{% endblock %}
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-    <a href="{% url 'platform-list' %}">Cancel</a>
-</form>
-</body>
-</html>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+
+        <div class="card shadow-sm border-danger">
+            <div class="card-body p-4">
+
+                <h1 class="mb-3 text-danger">
+                    Delete Platform
+                </h1>
+
+                <p class="mb-4">
+                    Are you sure you want to delete
+                    <strong>{{ platform.name }}</strong>?
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+
+                    <a href="{% url 'platform-list' %}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

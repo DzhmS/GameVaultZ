@@ -1,18 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Game</title>
-</head>
-<body>
-<h1>Delete Game</h1>
+{% extends 'base.html' %}
 
-<p>Are you sure you want to delete "{{ game.title }}"?</p>
+{% block title %}
+Delete Game
+{% endblock %}
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Delete</button>
-    <a href="{% url 'game-list' %}">Cancel</a>
-</form>
-</body>
-</html>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+
+        <div class="card shadow-sm border-danger">
+            <div class="card-body p-4">
+
+                <h1 class="mb-3 text-danger">Delete Game</h1>
+
+                <p class="mb-4">
+                    Are you sure you want to delete
+                    <strong>{{ game.title }}</strong>?
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+
+                    <a href="{% url 'game-list' %}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

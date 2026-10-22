@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ genre.name }}</title>
-</head>
-<body>
-<h1>{{ genre.name }}</h1>
-<p>{{ genre.description }}</p>
+{% extends 'base.html' %}
 
-<a href="{% url 'genre-update' genre.pk %}">Edit</a>
-<a href="{% url 'genre-delete' genre.pk %}">Delete</a>
-<a href="{% url 'genre-list' %}">Back to Genres</a>
+{% block title %}
+{{ genre.name }}
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+
+        <h1 class="card-title mb-3">
+            {{ genre.name }}
+        </h1>
+
+        <p class="card-text">
+            {{ genre.description|default:"No description." }}
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'genre-update' genre.pk %}"
+               class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'genre-delete' genre.pk %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            <a href="{% url 'genre-list' %}"
+               class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

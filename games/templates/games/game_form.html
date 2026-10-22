@@ -1,18 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Game Form</title>
-</head>
-<body>
-<h1>Create Game</h1>
+{% extends 'base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% block title %}
+Game Form
+{% endblock %}
 
-    <button type="submit">Save</button>
-    <a href="{% url 'game-list' %}">Cancel</a>
-</form>
-</body>
-</html>
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-6">
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+
+                <h1 class="mb-4">Game Form</h1>
+
+                <form method="post" enctype="multipart/form-data" class="styled-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+
+                        <a href="{% url 'game-list' %}"
+                           class="btn btn-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

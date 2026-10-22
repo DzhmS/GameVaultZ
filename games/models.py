@@ -17,5 +17,11 @@ class Game(models.Model):
     genres = models.ManyToManyField('Genre', blank=True)
     platforms = models.ManyToManyField('platforms.Platform', blank=True)
 
+    image = models.ImageField(
+        upload_to='games/',
+        blank=True,
+        null=True,
+    )
+
     def __str__(self):
         return self.title

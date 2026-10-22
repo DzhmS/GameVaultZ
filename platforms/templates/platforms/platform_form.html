@@ -1,18 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Platform Form</title>
-</head>
-<body>
-<h1>Platform Form</h1>
+{% extends 'base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% block title %}
+Platform Form
+{% endblock %}
 
-    <button type="submit">Save</button>
-    <a href="{% url 'platform-list' %}">Cancel</a>
-</form>
-</body>
-</html>
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-6">
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+
+                <h1 class="mb-4">Platform Form</h1>
+
+                <form method="post" class="styled-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
+
+                        <a href="{% url 'platform-list' %}"
+                           class="btn btn-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,28 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ game.title }}</title>
-</head>
-<body>
-<h1>{{ game.title }}</h1>
+{% extends 'base.html' %}
 
-<p>{{ game.description }}</p>
-<p>Release Date: {{ game.release_date|date:"F j, Y" }}</p>
-<p>Developer: {{ game.developer }}</p>
-<p>Publisher: {{ game.publisher }}</p>
-<h3>Genres</h3>
+{% block title %}
+{{ game.title }}
+{% endblock %}
 
-{% for genre in game.genres.all %}
-    <p>{{ genre.name }}</p>
-{% endfor %}
-<h3>Platforms</h3>
+{% block content %}
 
-{% for platform in game.platforms.all %}
-    <p>{{ platform.name }}</p>
-{% endfor %}
-<a href="{% url 'game-update' game.pk %}">Edit</a>
-<a href="{% url 'game-delete' game.pk %}">Delete</a>
-<a href="{% url 'game-list' %}">Back to Games</a>
-</body>
-</html>
+
+    <div class="card-body">
+
+        <h1 class="card-title mb-3">
+            {{ game.title }}
+        </h1>
+
+        <p class="card-text">
+            {{ game.description }}
+        </p>
+
+        <hr>
+
+        <p>
+            <strong>Release Date:</strong>
+            {{ game.release_date|date:"F j, Y" }}
+        </p>
+
+        <p>
+            <strong>Developer:</strong>
+            {{ game.developer }}
+        </p>
+
+        <p>
+            <strong>Publisher:</strong>
+            {{ game.publisher }}
+        </p>
+
+        <h5 class="mt-4">Genres</h5>
+
+        {% for genre in game.genres.all %}
+            <span class="badge bg-secondary">
+                {{ genre.name }}
+            </span>
+        {% empty %}
+            <p>No genres.</p>
+        {% endfor %}
+
+        <h5 class="mt-4">Platforms</h5>
+
+        {% for platform in game.platforms.all %}
+            <span class="badge bg-dark">
+                {{ platform.name }}
+            </span>
+        {% empty %}
+            <p>No platforms.</p>
+        {% endfor %}
+
+        <div class="mt-4">
+            <a href="{% url 'game-update' game.pk %}"
+               class="btn btn-primary">
+                Edit
+            </a>
+
+            <a href="{% url 'game-delete' game.pk %}"
+               class="btn btn-danger">
+                Delete
+            </a>
+
+            <a href="{% url 'game-list' %}"
+               class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
